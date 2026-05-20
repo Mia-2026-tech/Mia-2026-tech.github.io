@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陈瑜佳 — 个人求职主页</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    background: #fafbfc;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+
+  /* ===== Color Tokens ===== */
+  :root {
+    --deep-blue: #0f2744;
+    --deep-blue-light: #1a3f6b;
+    --accent: #b8945a;
+    --accent-light: #d4b87a;
+    --white: #ffffff;
+    --bg: #fafbfc;
+    --bg-alt: #f1f3f6;
+    --text-primary: #1e293b;
+    --text-secondary: #5e6f82;
+    --border: #e2e6ec;
+    --border-light: #edf0f4;
+    --radius: 6px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+    --shadow-lg: 0 1px 2px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06);
+  }
+
+  /* ===== Navbar ===== */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(15,39,68,0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.25rem;
+    padding: 0 1.5rem;
+    height: 52px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .navbar a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1.5px solid transparent;
+    transition: border-color 0.25s, color 0.25s;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+  .navbar a:hover { color: #fff; border-bottom-color: rgba(255,255,255,0.4); }
+  .navbar a.active { color: var(--accent-light); border-bottom-color: var(--accent-light); }
+
+  /* Mobile nav hamburger */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* ===== Section common ===== */
+  .section {
+    padding: 5.5rem 1.5rem;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .section-alt {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--deep-blue);
+    text-align: center;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0.8rem auto 0;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 1.5rem 4rem;
+    background: var(--bg);
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--deep-blue);
+    letter-spacing: 8px;
+    margin-bottom: 1rem;
+  }
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-bottom: 2rem;
+  }
+  .hero .tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero .tag-group span {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    padding: 0.35rem 1.1rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .hero .btn-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 2rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 1px;
+    transition: all 0.25s;
+  }
+  .btn-primary {
+    background: var(--deep-blue);
+    color: var(--white);
+  }
+  .btn-primary:hover { background: var(--deep-blue-light); transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+  .btn-outline {
+    background: transparent;
+    color: var(--deep-blue);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--deep-blue); background: rgba(15,39,68,0.03); }
+
+  /* ===== About ===== */
+  .info-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
+  }
+  .info-card dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 2.5rem;
+  }
+  .info-card dt {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .info-card dd {
+    color: var(--text-secondary);
+    padding: 0.2rem 0 0.2rem 0.75rem;
+    border-left: 1px solid var(--accent-light);
+    font-size: 0.9rem;
+    min-height: 1.2em;
+  }
+  .advantage-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+  .advantage-tags span {
+    background: var(--white);
+    color: var(--text-primary);
+    padding: 0.45rem 1.1rem;
+    border-radius: 2px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+  .self-eval {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .self-eval h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+  }
+  .self-eval p {
+    color: var(--text-secondary);
+    line-height: 2;
+    font-size: 0.92rem;
+  }
+
+  /* ===== Education Timeline ===== */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 1.5rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 1px var(--accent);
+    transform: translateX(-2px);
+  }
+  .timeline-item .time {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.35rem;
+  }
+  .timeline-item .school {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+  }
+  .timeline-item .major {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  .edu-supplement {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem;
+    box-shadow: var(--shadow-sm);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 2;
+  }
+
+  /* ===== Experience ===== */
+  .exp-block {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem;
+  }
+  .exp-block h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+  }
+  .exp-block .exp-role {
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.2rem;
+  }
+  .exp-block h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+    margin: 1rem 0 0.5rem;
+  }
+  .exp-block ul {
+    padding-left: 1.2rem;
+    list-style: disc;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 2;
+  }
+  .exp-block ul li::marker { color: var(--accent-light); }
+  .exp-placeholder {
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+    margin-top: 1.2rem;
+  }
+
+  /* ===== Skills ===== */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+  }
+  .skill-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 1.8rem 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .skill-card h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .skill-card ul {
+    padding-left: 1.2rem;
+    list-style: disc;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 2.1;
+  }
+  .skill-card ul li::marker { color: var(--accent-light); }
+
+  /* ===== Contact ===== */
+  .contact-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 2.5rem 2.25rem;
+    box-shadow: var(--shadow-sm);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .contact-card dl dt {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .contact-card dl dd {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    padding: 0.3rem 0 0.3rem 0.75rem;
+    border-left: 1px solid var(--accent-light);
+    font-size: 0.9rem;
+    min-height: 1.2em;
+  }
+
+  /* ===== Floating Button ===== */
+  .float-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    background: var(--deep-blue);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border-radius: 2px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 20px rgba(15,39,68,0.2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .float-btn:hover { background: var(--deep-blue-light); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(15,39,68,0.28); }
+
+  /* ===== Footer ===== */
+  .site-footer {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: var(--deep-blue);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    line-height: 2.2;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .navbar {
+      justify-content: space-between;
+      gap: 0;
+      padding: 0 1rem;
+    }
+    .navbar .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 52px;
+      left: 0;
+      right: 0;
+      background: rgba(15,39,68,0.98);
+      backdrop-filter: blur(12px);
+      padding: 1rem 1.5rem;
+      gap: 0.3rem;
+    }
+    .navbar .nav-links.open { display: flex; }
+    .navbar a { text-transform: none; letter-spacing: 0.5px; }
+    .nav-toggle { display: block; }
+
+    .hero h1 { font-size: 2rem; letter-spacing: 4px; }
+    .hero .subtitle { font-size: 0.9rem; }
+    .section { padding: 3.5rem 1.2rem; }
+
+    .info-card dl { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .float-btn {
+      bottom: 1.2rem;
+      right: 1.2rem;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.78rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar" id="navbar">
+  <button class="nav-toggle" id="navToggle" aria-label="菜单">&#9776;</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#home" class="active">首页</a>
+    <a href="#about">关于我</a>
+    <a href="#education">教育背景</a>
+    <a href="#experience">实践经历</a>
+    <a href="#skills">专业技能</a>
+    <a href="#contact">联系我</a>
+  </div>
+</nav>
+
+<!-- ===== Hero / Home ===== -->
+<section class="hero" id="home">
+  <h1>陈瑜佳</h1>
+  <p class="subtitle">四川外国语大学 · 俄语专业 &nbsp;|&nbsp; 赛事 / 活动 / 行政方向</p>
+  <div class="tag-group">
+    <span>大型赛事志愿</span>
+    <span>社团管理</span>
+    <span>俄语+英语</span>
+    <span>设计办公</span>
+  </div>
+  <div class="btn-group">
+    <a href="#" class="btn btn-primary" onclick="return false;">&#128196; 下载PDF简历</a>
+    <a href="#experience" class="btn btn-outline">查看核心经历</a>
+  </div>
+</section>
+
+<!-- ===== About ===== -->
+<section class="section" id="about">
+  <h2 class="section-title">关于我</h2>
+
+  <div class="info-card">
+    <dl>
+      <dt>毕业院校</dt>
+      <dd>四川外国语大学</dd>
+      <dt>所学专业</dt>
+      <dd>俄语（本科）</dd>
+      <dt>在读时段</dt>
+      <dd>2022.09 – 2026.06</dd>
+      <dt>求职意向</dt>
+      <dd>赛事 / 活动 / 行政（语言优势 + 综合文职）</dd>
+      <dt>意向城市</dt>
+      <dd>重庆 / 成都</dd>
+      <dt>政治面貌</dt>
+      <dd>共青团员</dd>
+    </dl>
+  </div>
+
+  <div class="advantage-tags">
+    <span>国家级大型赛事志愿经历</span>
+    <span>社团干部管理与活动组织</span>
+    <span>双语听说读写沟通能力</span>
+    <span>PS视觉设计与图文制作</span>
+    <span>办公软件+数据处理能力</span>
+  </div>
+
+  <div class="self-eval">
+    <h3>自我评价</h3>
+    <p>俄语专业本科应届毕业生，具备扎实的俄语听说读写译全项能力与跨文化交际意识。在校期间担任年级长及图管会宣传部部长，积累了团队管理、活动策划与新媒体运营经验。曾参与成都世运会预赛志愿工作，为外宾提供俄英双语支持并获组织方好评。熟练使用 Office 全套办公软件及 Photoshop 进行图文设计与数据处理，持有计算机一级证书。性格踏实稳重，责任心强，期望在赛事、活动或行政综合岗位上发挥语言优势与实务能力。</p>
+  </div>
+</section>
+
+<!-- ===== Education ===== -->
+<section class="section section-alt" id="education">
+  <h2 class="section-title">教育背景</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="time">2022.09 – 2026.06</div>
+      <div class="school">四川外国语大学</div>
+      <div class="major">俄语专业 · 本科</div>
+    </div>
+    <!-- 如需多段教育经历，可在此复制 .timeline-item -->
+  </div>
+
+  <div class="edu-supplement" style="margin-top: 2rem;">
+    <p><strong>主修课程：</strong>基础俄语、俄语语法、俄语视听说、俄语阅读、俄语翻译、俄罗斯文学史等，系统学习了俄语听说读写译全项技能，具备扎实的语言基础与跨文化交际意识。</p>
+    <p style="margin-top: 0.8rem;"><strong>相关证书：</strong>全国计算机等级考试一级合格证书 &nbsp;|&nbsp; 普通话水平测试等级证书 &nbsp;|&nbsp; 大学英语四级（CET-4）</p>
+  </div>
+</section>
+
+<!-- ===== Experience ===== -->
+<section class="section" id="experience">
+  <h2 class="section-title">实践经历</h2>
+
+  <div class="exp-block">
+    <h3>成都世运会预赛志愿者</h3>
+    <div class="exp-role">2025.08 – 2025.09 &nbsp;|&nbsp; 外宾接待 · 双语支持 · 赛事保障</div>
+    <h4>工作内容与成果</h4>
+    <ul>
+      <li>参与外宾接待与引导工作，为外国运动员团队提供现场俄语+英语双语支持</li>
+      <li>协助赛事场地布置、功能分区指引及后勤物资协调，保障预赛各环节有序运行</li>
+      <li>在岗期间零差错完成任务，获得赛事组织方好评</li>
+    </ul>
+    <div class="exp-placeholder">证书 / 照片展示区域</div>
+  </div>
+
+  <div class="exp-block">
+    <h3>年级长</h3>
+    <div class="exp-role">2024.09 – 2025.06 &nbsp;|&nbsp; 四川外国语大学</div>
+    <h4>团队管理与活动策划</h4>
+    <ul>
+      <li>协助辅导员管理年级日常事务，传达院校通知并跟进执行进度，覆盖年级 200+ 学生</li>
+      <li>统筹协调班委团队，定期召开工作例会，确保年级学生工作有序推进</li>
+      <li>策划并组织主题班会、年级评优等活动 5+ 场，场均参与人数 100+ 人</li>
+      <li>获"优秀学生干部"等荣誉称号</li>
+    </ul>
+    <div class="exp-placeholder">证书 / 照片展示区域</div>
+  </div>
+
+  <div class="exp-block">
+    <h3>图管会宣传部部长</h3>
+    <div class="exp-role">2024.09 – 2025.06 &nbsp;|&nbsp; 四川外国语大学图书馆</div>
+    <h4>新媒体运营与活动推广</h4>
+    <ul>
+      <li>负责图书馆官方微信公众号内容策划与运营，独立完成推文撰写、图文排版、封面设计等工作，发表推文 10+ 篇</li>
+      <li>策划并执行图书馆阅读打卡、世界读书日等阅读推广活动 3+ 场，活动参与人数累计 300+ 人次</li>
+      <li>通过海报设计、展板制作及现场宣传等方式提升活动曝光与参与度</li>
+    </ul>
+    <div class="exp-placeholder">社团活动照片展示区域</div>
+  </div>
+</section>
+
+<!-- ===== Skills ===== -->
+<section class="section section-alt" id="skills">
+  <h2 class="section-title">专业技能</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3>语言能力</h3>
+      <ul>
+        <li>俄语（主修）：听说读写译全项技能，具备跨文化交际意识</li>
+        <li>英语：CET-4，具备日常沟通与读写能力</li>
+        <li>普通话：持有普通话水平测试等级证书</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <h3>视觉设计</h3>
+      <ul>
+        <li>熟练使用 Photoshop 进行海报设计、图片编辑与图文排版</li>
+        <li>可独立完成公众号封面、活动物料等视觉制作</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <h3>办公 &amp; 计算机</h3>
+      <ul>
+        <li>熟练使用 Office 全套办公软件（Word / Excel / PPT）</li>
+        <li>具备文档排版、数据整理与汇报演示制作能力</li>
+        <li>掌握 Windows 系统日常操作，持有计算机一级证书</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section class="section" id="contact">
+  <h2 class="section-title">联系我</h2>
+
+  <div class="contact-card">
+    <dl>
+      <dt>手机号</dt>
+      <dd>18680716929</dd>
+      <dt>电子邮箱</dt>
+      <dd>18680716929@163.com</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <p>感谢您花时间了解我，期待与您进一步交流</p>
+  <p style="opacity: 0.6; font-size: 0.8rem;">陈瑜佳 · 个人求职主页 &copy; 2026</p>
+</footer>
+
+<!-- ===== Floating Button ===== -->
+<a href="#" class="float-btn" onclick="return false;" title="下载PDF简历">&#128196; 下载PDF简历</a>
+
+<!-- ===== Scripts ===== -->
+<script>
+  // Mobile nav toggle
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Close mobile nav when a link is clicked
+  document.querySelectorAll('#navLinks a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Highlight active nav link on scroll
+  var sections = document.querySelectorAll('section[id], .hero[id]');
+  var navLinks = document.querySelectorAll('#navLinks a');
+  window.addEventListener('scroll', function() {
+    var current = '';
+    sections.forEach(function(section) {
+      if (window.scrollY >= section.offsetTop - 100) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(function(link) {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
